@@ -162,6 +162,10 @@ print "Second name: %s" % last_name
 print "Email: %s" % email
 print "*****************************"
 
+if total_credits == "0":
+	print '\n' + bcolors.FAIL + "You have no credits available" + bcolors.ENDC + '\n'
+	sys.exit(0)
+
 print "\n     " + bcolors.WARNING + "[" + bcolors.ENDC + bcolors.HEADER + "MENU" + bcolors.ENDC + bcolors.WARNING + "]" + bcolors.ENDC
 print "-----------------"
 print "1. Call Spoofing"
