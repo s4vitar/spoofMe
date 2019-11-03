@@ -3,7 +3,7 @@
 
 # Autor: Marcelo Vázquez (aka s4vitar)
 
-import re, shutil, tempfile
+import re, shutil, tempfile, signal
 import requests
 import sys
 import ssl
@@ -25,6 +25,12 @@ if len(sys.argv) != 4:
 	print "\n" + bcolors.OKGREEN + "[" + bcolors.ENDC + bcolors.OKBLUE + "*" + bcolors.OKGREEN + "] Usage: python " + sys.argv[0] + " <area-code> <phone-number> <login-pin>\n" + bcolors.ENDC
 	print bcolors.BOLD + "Example: python " + sys.argv[0] + " 34 XXXXXXXXX 1234\n" + bcolors.ENDC
 	sys.exit(0)
+
+def signal_handler(key, frame):
+	print "\n\n[*] Exiting...\n"
+	sys.exit(1)
+
+signal = signal.signal(signal.SIGINT, signal_handler)
 
 area_code = sys.argv[1]
 phone_number = "+" + area_code + sys.argv[2]
@@ -127,6 +133,7 @@ content_file.write(r.content)
 content_file.close()
 
 with open('content_response.txt') as f:
+	total_credits = ''
 	for lines in f:
 		if re.search("credits_remaining", lines):
 			total_credits = lines.split('>')[2].split('<')[0]
