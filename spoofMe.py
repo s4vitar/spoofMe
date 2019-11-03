@@ -37,6 +37,7 @@ phone_number = "+" + area_code + sys.argv[2]
 login_pin = sys.argv[3]
 
 url = 'https://www.spoofcard.com/login'
+url_account = 'https://www.spoofcard.com/account'
 url_settings = 'https://www.spoofcard.com/account/settings'
 url_call_spoof = 'https://www.spoofcard.com/account/calls/create'
 url_sms_spoof = 'https://www.spoofcard.com/account/two-way-sms/create'
@@ -133,15 +134,26 @@ content_file.write(r.content)
 content_file.close()
 
 with open('content_response.txt') as f:
-	total_credits = ''
 	for lines in f:
-		if re.search("credits_remaining", lines):
-			total_credits = lines.split('>')[2].split('<')[0]
-		elif re.search("incorrect", lines):
+		if re.search("incorrect", lines):
 			print bcolors.OKGREEN + "[" + bcolors.ENDC + bcolors.OKBLUE + "*" + bcolors.ENDC + bcolors.OKGREEN + "] The data entered does not correspond to any account\n" + bcolors.ENDC
 			print bcolors.OKGREEN + "[" + bcolors.ENDC + bcolors.OKBLUE + "*" + bcolors.ENDC + bcolors.OKGREEN + "] Please, create an account first at https://www.spoofcard.com\n" + bcolors.ENDC
 			os.remove("content_response.txt")
 			sys.exit(0)
+
+os.remove("content_response.txt")
+
+r = session.post(url_account, data=login, verify=False)
+
+content_file = open("content_response.txt", "w")
+content_file.write(r.content)
+content_file.close()
+
+with open('content_response.txt') as f:
+        for lines in f:
+                if re.search("credits_remaining", lines):
+			total_credits = lines.split('>')[2].split('<')[0]
+
 
 os.remove("content_response.txt")
 
