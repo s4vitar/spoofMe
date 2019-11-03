@@ -60,7 +60,7 @@ def sms_spoofing():
 	message = raw_input('\nEnter message to display: ')
 
 	sms_spoofing_data = {'body': message, 'destination_address': destination_number, 'source_address': display_number, 'tos_accepted': 'true', 'oneWay': 'true'}
-	sms_spoofing_headers = {'accept-encoding': 'gzip, deflate, br', 'accept-language': 'es-ES,es;q=0.9,en;q=0.8', 'content-type': 'application/x-www-form-urlencoded', 'accept': 'application/json, text/plain, */*', 'x-requested-with': ' XMLHttpRequest'}
+	sms_spoofing_headers = {'accept-encoding': 'gzip, deflate, br', 'accept-language': 'es-ES,es;q=0.9,en;q=0.8', 'content-type': 'application/x-www-form-urlencoded', 'accept': 'application/json, text/plain, */*', 'x-requested-with': 'XMLHttpRequest'}
 
 	r = session.post(url_sms_spoof, data=sms_spoofing_data, headers=sms_spoofing_headers, verify=False)
 
@@ -112,7 +112,7 @@ def call_spoofing():
 banner = "\n╱╱╱╱╱╱╱╱╱╱╱╱╱╭━┳━╮╭━╮\n"
 banner += "╱╱╱╱╱╱╱╱╱╱╱╱╱┃╭┫┃╰╯┃┃\n"
 banner += "╭━━┳━━┳━━┳━━┳╯╰┫╭╮╭╮┣━━╮\n"
-banner += "┃━━┫╭╮┃╭╮┃╭╮┣╮╭┫┃┃┃┃┃┃━┫" + bcolors.WARNING + "(Owner Marcelo Vázquez - aka " + bcolors.ENDC + bcolors.OKBLUE + "s4vitar" + bcolors.ENDC + bcolors.WARNING + ")\n" + bcolors.ENDC
+banner += "┃━━┫╭╮┃╭╮┃╭╮┣╮╭┫┃┃┃┃┃┃━┫" + bcolors.WARNING + " (Owner Marcelo Vázquez - aka " + bcolors.ENDC + bcolors.OKBLUE + "s4vitar" + bcolors.ENDC + bcolors.WARNING + ")\n" + bcolors.ENDC
 banner += "┣━━┃╰╯┃╰╯┃╰╯┃┃┃┃┃┃┃┃┃┃━┫\n"
 banner += "╰━━┫╭━┻━━┻━━╯╰╯╰╯╰╯╰┻━━╯\n"
 banner += "╱╱╱┃┃\n"
